@@ -1,4 +1,4 @@
-package components.ui
+package com.example.kotlin_app_teste.core.designsystem.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,9 +22,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomButton(text: String, icon: ImageVector? = null) {
+fun CustomButton(
+    text: String,
+    icon: ImageVector? = null,
+    onClick: () -> Unit,
+) {
     Button(
-        onClick = {},
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(35.dp, 0.dp)

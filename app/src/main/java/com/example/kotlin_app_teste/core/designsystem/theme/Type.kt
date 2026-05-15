@@ -1,4 +1,4 @@
-package components.theme
+package com.example.kotlin_app_teste.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

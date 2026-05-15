@@ -1,4 +1,4 @@
-package components.ui
+package com.example.kotlin_app_teste.core.designsystem.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
