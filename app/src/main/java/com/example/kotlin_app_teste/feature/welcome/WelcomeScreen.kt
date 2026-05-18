@@ -11,15 +11,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawOutline
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -31,36 +28,27 @@ fun WelcomeScreen() {
     ) {
         Column(
             modifier = Modifier
-                .padding(35.dp, 20.dp)
+                .padding(30.dp, 20.dp)
         ) {
-            Row(
-
-            ) {
-                Button(
+            Row {
+                Surface(
                     onClick = {},
-                    modifier = Modifier
-                        .padding(0.dp)
-                        .drawBehind {
-                            drawOutline(
-                                outline = RoundedCornerShape(10.dp).createOutline(size, layoutDirection, this),
-                                color = Color(0xFFF9FAFB),
-                            )
-                        },
+                    modifier = Modifier.size(44.dp),
                     shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent,
-                        contentColor = Color.Gray
-                    ),
+                    color = Color(0xFFF9FAFB),
                     border = BorderStroke(2.dp, Color(0xFFE0E0E0)),
                 ) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBackIosNew,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(0.dp)
-                            .size(20.dp),
-                        tint = Color.Black,
-                    )
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBackIosNew,
+                            contentDescription = "Voltar",
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.Black,
+                        )
+                    }
                 }
             }
         }
