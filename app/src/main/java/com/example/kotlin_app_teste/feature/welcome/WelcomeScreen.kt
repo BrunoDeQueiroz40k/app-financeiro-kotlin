@@ -19,73 +19,43 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.material.icons.filled.TrendingUp
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.animation.core.animateValue
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kotlin_app_teste.core.designsystem.component.CustomButton
 
 private val bubbleIconTint = Color(0xFF2563EB)
-
-@Composable
-private fun Modifier.smoothFloatAnimation(
-    distance: Dp = 8.dp,
-    durationMillis: Int = 2800,
-    delayMillis: Int = 0,
-): Modifier {
-    val infiniteTransition = rememberInfiniteTransition(label = "bubbleFloat")
-    val offsetY by infiniteTransition.animateValue(
-        initialValue = -distance,
-        targetValue = distance,
-        typeConverter = Dp.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = durationMillis,
-                delayMillis = delayMillis,
-                easing = FastOutSlowInEasing,
-            ),
-            repeatMode = RepeatMode.Reverse,
-        ),
-        label = "bubbleFloatOffset",
-    )
-    return offset(y = offsetY)
-}
+private val outerCircleShape = RoundedCornerShape(999.dp)
 
 @Composable
 private fun FloatingIconBubble(
     icon: ImageVector,
     contentDescription: String,
-    modifier: Modifier = Modifier,
-    floatDelayMillis: Int = 0,
+    modifier: Modifier = Modifier
 ) {
     Surface(
-        modifier = modifier
-            .smoothFloatAnimation(delayMillis = floatDelayMillis)
-            .size(52.dp),
+        modifier = modifier.size(52.dp),
         shape = CircleShape,
         color = Color.White,
-        shadowElevation = 10.dp,
+        shadowElevation = 5.dp,
         tonalElevation = 0.dp,
     ) {
         Box(
@@ -98,6 +68,62 @@ private fun FloatingIconBubble(
                 modifier = Modifier.size(26.dp),
                 tint = bubbleIconTint,
             )
+        }
+    }
+}
+
+@Composable
+private fun WelcomeCard(
+    icon: ImageVector,
+    title: String,
+    contentDescription: String
+) {
+    Box(
+        modifier = Modifier
+            .padding(vertical = 10.dp)
+            .clip(RoundedCornerShape(25.dp))
+            .background(Color(0xFFF9FAFB))
+            .border(
+                width = 2.dp,
+                color = Color(0xFFE0E0E0),
+                shape = RoundedCornerShape(25.dp),
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(22.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Surface(
+                shape = RoundedCornerShape(15.dp),
+                color = Color(0xFFF9FAFB),
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = title,
+                    modifier = Modifier
+                        .background(Color.White)
+                        .padding(12.dp)
+                        .size(32.dp),
+                    tint = bubbleIconTint
+                )
+            }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Text(
+                    title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    contentDescription,
+                    fontSize = 16.sp,
+                    color = Color(0xFF6B7280)
+                )
+            }
         }
     }
 }
@@ -122,7 +148,7 @@ fun WelcomeScreen() {
                 Surface(
                     onClick = {},
                     modifier = Modifier.size(44.dp),
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(15.dp),
                     color = Color(0xFFF9FAFB),
                     border = BorderStroke(2.dp, Color(0xFFE0E0E0)),
                 ) {
@@ -145,14 +171,14 @@ fun WelcomeScreen() {
                         modifier = Modifier
                             .width(32.dp)
                             .height(8.dp)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(outerCircleShape)
                             .background(Color(0xFF2563EB))
                     ) {}
                     Box(
                         modifier = Modifier
                             .width(8.dp)
                             .height(8.dp)
-                            .clip(RoundedCornerShape(999.dp))
+                            .clip(outerCircleShape)
                             .background(Color(0xFFE5E7EB))
                     ) {}
                 }
@@ -177,6 +203,13 @@ fun WelcomeScreen() {
                     Box(
                         modifier = Modifier
                             .size(192.dp)
+                            .shadow(
+                                elevation = 20.dp,
+                                shape = outerCircleShape,
+                                clip = false,
+                                ambientColor = Color(0xFF2563EB).copy(alpha = 0.4f),
+                                spotColor = Color.Black.copy(alpha = 0.4f),
+                            )
                             .drawBehind {
                                 drawCircle(
                                     brush = Brush.linearGradient(
@@ -194,7 +227,7 @@ fun WelcomeScreen() {
                             .border(
                                 width = 2.dp,
                                 color = Color(0xFFDBEAFE),
-                                shape = RoundedCornerShape(999.dp),
+                                shape = outerCircleShape,
                             ),
                         contentAlignment = Alignment.Center,
                     ) {
@@ -221,7 +254,6 @@ fun WelcomeScreen() {
                     FloatingIconBubble(
                         icon = Icons.Filled.TrendingUp,
                         contentDescription = "Tendência",
-                        floatDelayMillis = 0,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                             .offset(x = 2.dp, y = 18.dp),
@@ -230,13 +262,38 @@ fun WelcomeScreen() {
                     FloatingIconBubble(
                         icon = Icons.Filled.AccountBalanceWallet,
                         contentDescription = "Carteira",
-                        floatDelayMillis = 1400,
                         modifier = Modifier
                             .align(Alignment.BottomStart)
                             .offset(x = 2.dp, y = (-18).dp),
                     )
                 }
+                Text(
+                    "Controle Total",
+                    modifier = Modifier.padding(0.dp, 26.dp, 0.dp, 10.dp),
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Assuma o controle do seu dinheiro. Acompanhe gastos, crie metas e alcance sua liberdade financeira.",
+                    modifier = Modifier.width(240.dp).padding(bottom = 30.dp),
+                    textAlign = TextAlign.Center,
+                    fontSize = 15.sp
+                )
+                WelcomeCard(
+                    icon = Icons.Filled.Checklist,
+                    title = "Organização Simples",
+                    contentDescription = "Categorize seus gastos automaticamente"
+                )
+                WelcomeCard(
+                    icon = Icons.Filled.Checklist,
+                    title = "Visão Clara",
+                    contentDescription = "Gráficos intuitivos para entender seu dinheiro"
+                )
             }
+            CustomButton(
+                icon = Icons.Filled.ArrowForward,
+                text = "Próximo passo"
+            ) { }
         }
     }
 }
