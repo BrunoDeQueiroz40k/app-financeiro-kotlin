@@ -18,7 +18,7 @@ fun AppNavigation() {
             LoginScreen(navController = navController)
         }
         composable(Routes.WELCOME) {
-            WelcomeScreen()
+            WelcomeScreen(navController = navController)
         }
     }
 }

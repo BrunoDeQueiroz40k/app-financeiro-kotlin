@@ -1,6 +1,5 @@
 package components.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,28 +13,45 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LoginAsButton(
+fun CustomButton(
     text: String,
     icon: ImageVector? = null,
-    backgroundColor: Color = Color(0xFF2A68ED),
-    textColor: Color = Color.White
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    horizontalPadding: Dp = 35.dp,
 ) {
     Button(
-        onClick = {},
-        modifier = Modifier
+        onClick = onClick,
+        modifier = modifier
             .fillMaxWidth()
-            .padding(35.dp, 0.dp)
+            .then(
+                if (horizontalPadding > 0.dp) {
+                    Modifier.padding(horizontal = horizontalPadding)
+                } else {
+                    Modifier
+                },
+            )
             .drawBehind {
                 drawOutline(
                     outline = RoundedCornerShape(15.dp).createOutline(size, layoutDirection, this),
-                    color = backgroundColor,
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0xFF2A68ED),
+                            Color(0xFF2A68ED),
+                        ),
+                        start = Offset.Zero,
+                        end = Offset(size.width, size.height),
+                    ),
                 )
             },
         shape = RoundedCornerShape(15.dp),
@@ -43,27 +59,25 @@ fun LoginAsButton(
             containerColor = Color.Transparent,
             contentColor = Color.White,
         ),
-        border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
     ) {
         Row(
-            modifier = Modifier.padding(0.dp, 6.dp),
+            modifier = Modifier.padding(0.dp, 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            Text(
+                text,
+                fontSize = 16.sp
+            )
             if(icon != null) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(end = 8.dp)
+                        .padding(start = 8.dp)
                         .size(20.dp),
                     tint = Color.White,
                 )
             }
-            Text(
-                text,
-                fontSize = 16.sp,
-                color = textColor
-            )
         }
     }
 }

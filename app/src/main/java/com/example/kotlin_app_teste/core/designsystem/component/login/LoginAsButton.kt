@@ -1,4 +1,4 @@
-package com.example.kotlin_app_teste.core.designsystem.component
+package com.example.kotlin_app_teste.core.designsystem.component.login
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row

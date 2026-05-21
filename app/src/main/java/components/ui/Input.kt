@@ -1,4 +1,4 @@
-package com.example.kotlin_app_teste.core.designsystem.component
+package components.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -58,7 +58,7 @@ fun Input(inputText: String, inputPlaceholderText: String, type: InputType) {
 
     Column(
         modifier = when (type) {
-            InputType.InputEmail -> Modifier.padding(35.dp, 30.dp)
+            InputType.InputEmail -> Modifier.padding(35.dp, 25.dp)
             InputType.InputPassword -> Modifier.padding(35.dp, 0.dp)
         },
     ) {

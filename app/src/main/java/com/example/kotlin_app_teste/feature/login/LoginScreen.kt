@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.ArrowForward
@@ -19,12 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.kotlin_app_teste.core.designsystem.component.CustomButton
-import com.example.kotlin_app_teste.core.designsystem.component.Header
-import com.example.kotlin_app_teste.core.designsystem.component.Input
-import com.example.kotlin_app_teste.core.designsystem.component.InputType
-import com.example.kotlin_app_teste.core.designsystem.component.LoginAsButton
-import com.example.kotlin_app_teste.core.designsystem.component.Separator
+import components.ui.CustomButton
+import com.example.kotlin_app_teste.core.designsystem.component.login.Header
+import components.ui.Input
+import components.ui.InputType
+import com.example.kotlin_app_teste.core.designsystem.component.login.LoginAsButton
+import components.ui.Separator
 import com.example.kotlin_app_teste.core.navigation.Routes
 
 @Composable
@@ -34,6 +36,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .background(Color.White),
     ) {
         Header()

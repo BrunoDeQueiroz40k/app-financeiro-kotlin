@@ -1,4 +1,4 @@
-package com.example.kotlin_app_teste.core.designsystem.component
+package com.example.kotlin_app_teste.core.designsystem.component.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +33,7 @@ fun Header() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(280.dp)
+            .height(250.dp)
             .shadow(
                 elevation = 20.dp,
                 shape = RoundedCornerShape(
